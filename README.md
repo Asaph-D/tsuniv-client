@@ -76,7 +76,6 @@ Cela génère une version optimisée dans le dossier `dist/`.
 - [Documentation Vite](https://vitejs.dev/guide/)
 - [Documentation React](https://reactjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/docs/installation)
-- [Supabase](https://supabase.com/docs)
 - [Daisyui](https://daisyui.com)
 -[React-router](https://reactrouter.com/)
 
