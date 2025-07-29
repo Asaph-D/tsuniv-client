@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ⚡ Démarrer avec Vite + React – `tsuniv-client`
 
-## Available Scripts
+Ce projet constitue le frontend de **TS_Univ**, la plateforme de gestion des logements universitaires, développé avec **Vite**, **React**, et **Tailwind CSS** pour une performance optimale.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🗂️ Structure du projet `tsuniv-client`
+```
+tsuniv-client/
+├── public/               # Fichiers statiques (index.html, favicon, etc.)
+├── src/
+│   ├── assets/           # Images, icônes et autres fichiers média
+│   ├── components/       # Composants réutilisables (Button, Card, Input...)
+│   ├── pages/            # Vues/pages principales (HomePage, LoginPage, DashboardPage...)
+│   ├── services/         # Fonctions pour interagir avec Supabase/API
+│   ├── contexts/         # Stores React via Context API (ex : AuthContext)
+│   ├── hooks/            # Hooks personnalisés (useAuth, useFetch, etc.)
+│   ├── utils/            # Fonctions utilitaires (formatage, validation, etc.)
+│   ├── App.js            # Composant racine de l'app
+│   └── index.js          # Point d'entrée principal (ReactDOM)
+├── package.json          # Dépendances, scripts, configurations
+├── README.md             # Documentation du projet
+└── .env.example          # Variables d'environnement d'exemple (ex: API_URL, SUPABASE_KEY)
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ⚙️ Installation & Lancement
 
-### `npm test`
+### 🔧 Prérequis
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js ≥ 18
+- npm ou yarn
 
-### `npm run build`
+### 📦 Installer les dépendances
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 🚀 Lancer le serveur en développement
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run dev
+```
 
-### `npm run eject`
+👉 Accès à l’app sur [http://localhost:5173](http://localhost:5173)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+> ✅ Vite recharge automatiquement le code  
+> 📉 Les erreurs apparaissent dans la console
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🏗️ Build pour la production
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run build
+```
 
-## Learn More
+Cela génère une version optimisée dans le dossier `dist/`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔍 Scripts additionnels
 
-### Code Splitting
+- `npm run preview` : Lance un serveur local pour visualiser le build
+- `npm run lint` : Vérifie la qualité du code (si ESLint est configuré)
+- `npm run format` : Formate le code avec Prettier (si intégré)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 📘 Ressources utiles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- [Documentation Vite](https://vitejs.dev/guide/)
+- [Documentation React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/docs/installation)
+- [Supabase](https://supabase.com/docs)
+- [Daisyui](https://daisyui.com)
+-[React-router](https://reactrouter.com/)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
