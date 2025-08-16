@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -31,19 +32,21 @@ const Footer = () => {
         >
           {/* À propos */}
           <div>
-            <h3 className="text-xl font-bold text-white mb-4">UniLogis</h3>
+            <h3 className="text-xl font-bold text-white mb-4">TSUniv</h3>
             <p className="text-sm">
-              UniLogis est la plateforme de référence pour trouver votre logement étudiant idéal, près de votre campus.
+              TSUniv est la plateforme de référence pour trouver votre logement étudiant idéal, près de votre campus.
             </p>
           </div>
 
           {/* Liens rapides */}
           <div>
-            <h3 className="text-xl font-bold text-white mb-4">Liens rapides</h3>
-            <ul className="space-y-2">
-              {["Rechercher un logement", "Services", "Témoignages", "À propos de nous"].map((text, i) => (
-                <li key={i}>
-                  <a href="#" className="hover:text-white transition-colors duration-200">{text}</a>
+            <h3 className="text-xl font-bold text-white mb-4 text-center">Liens rapides</h3>
+            <ul className="flex flex-wrap justify-around gap-y-3">
+              {["Rechercher un logement", "Témoignages", "Politique de confidentialite", "À propos de nous", 
+                "Condition generale d'utilisation"
+              ].map((text, i) => (
+                <li  key={i} className="speed-link">
+                  <a href="#" className=" hover:font-bold transition-all duration-300 ease-in-out">{text}</a>
                 </li>
               ))}
             </ul>
@@ -51,27 +54,27 @@ const Footer = () => {
 
           {/* Contact */}
           <div >
-            <h3 className="text-xl font-bold text-white mb-4">Contact</h3>
+            <h3 className="text-xl font-bold text-white mb-4 text-center">Contact</h3>
             <ul className="space-y-2">
               <li className="flex items-start">
                 <Locate size={20} className="mr-2 text-orange-400 flex-shrink-0" />
-                <span>123 Rue de l'Université, 75000 Paris, France</span>
+                <span>123 Rue de l'Université, 75000 Dschang, Cameroun</span>
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="mr-2 text-orange-400" />
-                <a href="mailto:contact@unilogis.com" className="hover:text-white transition-colors duration-200">contact@unilogis.com</a>
+                <a href="mailto:contact@unilogis.com" className="hover:text-white transition-colors duration-200">contact@Tsuniv.com</a>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="mr-2 text-orange-400" />
-                <span>+33 1 23 45 67 89</span>
+                <span>+237 6 95 05 61 61</span>
               </li>
             </ul>
           </div>
 
           {/* Réseaux sociaux */}
           <div >
-            <h3 className="text-xl font-bold text-white mb-4">Suivez-nous</h3>
-            <div className="flex space-x-4">
+            <h3 className="text-xl font-bold text-white mb-4 text-center">Suivez-nous</h3>
+            <div className="flex space-x-4 justify-center">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
                 <a
                   key={i}

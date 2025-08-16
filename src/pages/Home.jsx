@@ -207,7 +207,7 @@ const Homes = () => {
       university: "Sorbonne Université",
       image:
         "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=1",
-      text: "Grâce à UniLogis, j'ai trouvé un studio parfait à 10 minutes de mon campus. Le processus était simple et rapide !",
+      text: "Grâce à TSUniv, j'ai trouvé un studio parfait à 10 minutes de mon campus. Le processus était simple et rapide !",
       rating: 5,
     },
     {
@@ -215,7 +215,7 @@ const Homes = () => {
       university: "École Polytechnique",
       image:
         "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=1",
-      text: "La colocation que j'ai trouvée via UniLogis est géniale. Mes colocataires sont devenus mes meilleurs amis !",
+      text: "La colocation que j'ai trouvée via TSUniv est géniale. Mes colocataires sont devenus mes meilleurs amis !",
       rating: 5,
     },
     {
@@ -228,22 +228,42 @@ const Homes = () => {
     },
   ];
 
+  const videoRef = useRef(null);
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.matchMedia("(min-width: 600px)").matches) {
+        const { scrollTop } = document.documentElement;
+       scrollTop > 240 ?  videoRef.current?.classList.add('scrollimage'):
+          videoRef.current?.classList.remove('scrollimage')  
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+
+
+
   return (
     <div id="smooth-content">
       <header
         data-speed="1"
         data-lag="0.5"
-        className="text-white bg-gradient-to-tl from-gray-800 to-transparent -z-0 relative overflow-hidden h-screen flex flex-col justify-center items-center px-4"
+        className="text-white bg-gradient-to-tl from-gray-800 to-transparent -z-0 relative 
+        overflow-hidden h-screen flex flex-col justify-center items-center px-4"
       >
         <video
           className="w-full h-full object-cover absolute top-0 left-0 -z-10 contrast-[0.8] brightness-75"
+          ref={videoRef}
           src={Video}
           autoPlay
           loop
           muted
         />
 
-        <div className="flex flex-col justify-center items-center h-screen w-full max-w-7xl">
+        <div className="relative flex flex-col justify-center items-center h-screen w-full max-w-7xl top-20">
           <div className="flex flex-col justify-center items-center gap-4 w-full md:w-3/5">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center">
               Trouvez votre

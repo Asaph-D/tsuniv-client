@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Home, Menu, BarChart2, MessageCircle, PhoneCall } from "lucide-react";
+import { Home, BarChart2, MessageCircle, PhoneCall, LogIn } from "lucide-react";
 import { Link } from "react-router";
 import gsap from "gsap";
 import { ScrollTrigger, ScrollSmoother } from "gsap/all";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -23,7 +23,6 @@ function scrollToSection(id) {
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!smoother) {
@@ -36,7 +35,7 @@ const NavBar = () => {
     }
 
     const handleScroll = () => {
-      setScrolled(window.scrollY >= window.innerHeight);
+      setScrolled(window.scrollY >= 100);
     };
     window.addEventListener("scroll", handleScroll);
 
@@ -76,7 +75,8 @@ const NavBar = () => {
           <Home size={32} />
           <Link
             to="/"
-            className="text-2xl font-bold bg-gradient-to-bl from-orange-400 to-gray-400 text-transparent bg-clip-text"
+            className="text-2xl font-bold 
+            bg-gradient-to-bl from-orange-400 to-gray-400 text-transparent bg-clip-text"
           >
             TS_UNIV
           </Link>
@@ -104,38 +104,27 @@ const NavBar = () => {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-          <Menu size={28} />
-        </button>
+        <div className="flex gap-4 text-white md:hidden" >
+          <Link to="/login" className="flex flex-col items-center hover:scale-105 transition-all duration-300 ease-in-out">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+            className="h-6 w-6 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-2xl" 
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+            <span className={`${scrolled && `text-black font-bold`} transition-all duration-1000 ease-in-out origin-center`}>Login</span>
+          </Link>
 
-        {/* Mobile Dropdown Menu */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 w-full bg-white text-black shadow-md flex flex-col items-center py-4 gap-4 md:hidden"
-            >
-              {Tab_Ancrages.map(({ id, label }) => (
-                <button
-                  key={id}
-                  onClick={() => {
-                    scrollToSection(id);
-                    setMenuOpen(false);
-                  }}
-                  className={`text-lg font-semibold transition-colors duration-300
-                    ${activeSection === id ? "text-orange-500" : ""}
-                    hover:text-orange-400`}
-                >
-                  {label}
-                </button>
-              ))}
-              <Link className="btn btn-ghost w-3/4" to="/login">Connexion</Link>
-              <Link className="btn bg-yellow-600 text-white w-3/4" to="/register">S'inscrire</Link>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          <Link to="/register" className="flex flex-col items-center hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+            className="h-6 w-6 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-2xl"
+             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            <span className={`${scrolled && `text-black font-bold`} transition-all duration-1000 ease-in-out origin-center`}>Sign Up</span>
+          </Link>
+  
+        </div>
+
       </motion.nav>
 
       {/* Bottom Mobile Sidebar */}
