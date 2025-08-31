@@ -1,0 +1,49 @@
+
+
+.range-slider {
+  width: 100%;
+}
+
+.range-slider.margin-lg {
+  margin: auto ;
+}
+
+/* Gradient Range Slider (modifié) */
+#range-slider-gradient {
+  height: 24px;
+  border-radius: 12px;
+  background: linear-gradient(to right, #f3f4f6, #f97316); /* gris → orange */
+}
+
+#range-slider-gradient .range-slider__thumb {
+  border: 6px solid #fff;
+  box-sizing: border-box;
+}
+
+#range-slider-gradient .range-slider__thumb[data-lower] {
+  background: #f97316; /* orange */
+}
+
+#range-slider-gradient .range-slider__thumb[data-upper] {
+  background: #9ca3af; /* gray-400 */
+}
+
+#range-slider-gradient .range-slider__range {
+  background: linear-gradient(to right, #f97316, #9ca3af); /* orange → gray */
+  background-size: 200% 100%;
+  background-position: 50% 0;
+}
+
+#range-slider-gradient .range-slider__range[data-active],
+#range-slider-gradient .range-slider__thumb[data-active] ~ .range-slider__range {
+  animation: move-bg 0.75s infinite linear;
+}
+
+@keyframes move-bg {
+  0% { background-position: 50% 0; }
+  25% { background-position: 100% 0; }
+  50% { background-position: 50% 0; }
+  75% { background-position: 0% 0; }
+  100% { background-position: 50% 0; }
+}
+

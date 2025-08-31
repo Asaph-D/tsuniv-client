@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-
+import {motion} from "framer-motion";
 
 const Erreur = () => {
   return (
@@ -8,7 +8,6 @@ const Erreur = () => {
         <p className="text-center mt-4">Désolé, la page que vous recherchez n'existe pas.</p>
         <p className="text-center mt-2">Veuillez vérifier l'URL ou retourner à la page d'accueil.</p>
         <Link className="btn btn-primary" to={'/'}>Accueil</Link>
-
     </div>
   );
 }
