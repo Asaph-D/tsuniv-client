@@ -1,12 +1,26 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import CardSearch from "@components/student/search/CardSearch";
+import RoomModal from "@components/student/RoomModal";
 
 const Carossel = ({ cards }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
     const carouselRef = useRef(null);
     const intervalRef = useRef(null);
+
+    // États pour gérer la modale
+    const [selectedRoom, setSelectedRoom] = useState(null);
+
+    // Fonction pour gérer le clic sur une carte et ouvrir la modale
+    const handleCardClick = (room) => {
+        setSelectedRoom(room);
+    };
+
+    // Fonction pour fermer la modale
+    const handleCloseModal = () => {
+        setSelectedRoom(null);
+    };
 
     const next = () => {
         setActiveIndex((prev) => {
@@ -103,10 +117,12 @@ const Carossel = ({ cards }) => {
                         viewport={{ amount: 0.4 }}
                         transition={{ duration: 0.5, ease: "easeOut" }}
                     >
-                        <CardSearch room={elem} />
+                        {/* Passage de la fonction handleCardClick en tant que prop onClick */}
+                        <CardSearch room={elem} onClick={handleCardClick} />
                     </motion.div>
                 ))}
             </div>
+
             {/* Navigation centrée verticalement */}
             <div className="absolute w-full bottom-1/2 flex transform justify-between z-10">
                 <motion.button
@@ -126,6 +142,9 @@ const Carossel = ({ cards }) => {
                     ❯
                 </motion.button>
             </div>
+
+            {/* Rendu conditionnel de la modale */}
+            {selectedRoom && <RoomModal room={selectedRoom} onClose={handleCloseModal} />}
         </div>
     );
 };

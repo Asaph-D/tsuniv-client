@@ -22,7 +22,7 @@ const initialFormData = {
 };
 
 const useInscriptionStore = create((set) => ({
-  currentStep: 1,
+  currentStep: 3,
   formData: { ...initialFormData },
   errors: {},
   filePreviews: {},

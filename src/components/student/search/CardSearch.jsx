@@ -1,6 +1,5 @@
-import { Heart, Locate, Users, Shield } from "lucide-react";
+import { Heart, Locate, Users, Shield, Eye } from "lucide-react";
 import LazyImage from "@components/shared/LazyImage";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const FavoriteButton = () => (
@@ -9,7 +8,7 @@ const FavoriteButton = () => (
     </button>
 );
 
-const CardSearch = ({ room }) => {
+const CardSearch = ({ room, onClick }) => {
     const {
         name,
         location,
@@ -39,16 +38,24 @@ const CardSearch = ({ room }) => {
                     className="w-full h-64 object-cover"
                 />
                 <FavoriteButton />
+
+                {/* Badge centré si indisponible */}
+                {!isAvailable && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="px-4 py-1 text-white text-lg backdrop-brightness-70 font-semibold rounded-full shadow">
+                            Indisponible
+                        </span>
+                    </div>
+                )}
+
                 <div className="absolute top-3 left-3 flex gap-2">
                     {isAvailable && (
-                        <span className="px-2 py-1 text-xs font-semibold
-                         text-white backdrop-brightness-100 rounded-full backdrop-blur">
+                        <span className="px-2 py-1 text-xs font-semibold text-white backdrop-brightness-100 rounded-full backdrop-blur">
                             Disponible
                         </span>
                     )}
                     {isCertified && (
-                        <span className=" flex items-center gap-1 p-1 text-xs font-semibold backdrop-brightness-150 
-                        rounded-full text-white bg-orange-500 backdrop-blur">
+                        <span className="flex items-center gap-1 p-1 text-xs font-semibold backdrop-brightness-150 rounded-full text-white bg-orange-500 backdrop-blur">
                             <Shield className="h-4 w-4" />
                             Certifié
                         </span>
@@ -58,9 +65,7 @@ const CardSearch = ({ room }) => {
 
             {/* Infos */}
             <div className="p-4 space-y-4">
-                <h2 className="text-lg font-semibold text-gray-800">
-                    {name}
-                </h2>
+                <h2 className="text-lg font-semibold text-gray-800">{name}</h2>
                 <p className="text-sm text-gray-500 flex items-center gap-1">
                     <Locate className="w-4 h-4" />
                     {location}
@@ -93,11 +98,21 @@ const CardSearch = ({ room }) => {
                 {/* Prix + bouton */}
                 <div className="flex justify-between items-center mt-4">
                     <h3 className="text-xl font-bold text-orange-600">
-                        {price.toLocaleString()} <span className="text-sm font-medium text-gray-500">{currency}/mois</span>
+                        {price.toLocaleString()}{" "}
+                        <span className="text-sm font-medium text-gray-500">
+                            {currency}/mois
+                        </span>
                     </h3>
-                    <button className="px-4 py-2 rounded-xl bg-gradient-to-br from-orange-500 via-orange-400 to-gray-100
-                     text-white font-semibold hover:from-orange-600 transition">
-                        Voir détails
+                    <button
+                        onClick={() => isAvailable && onClick(room)}
+                        disabled={!isAvailable}
+                        className={`flex gap-2 items-center px-4 py-2 rounded-xl font-semibold transition ${isAvailable
+                                ? "bg-gradient-to-br from-orange-500 via-orange-400 to-gray-100 text-white hover:from-orange-600"
+                                : "bg-gray-200 text-gray-400 cursor-not-allowed opacity-60"
+                            }`}
+                    >
+                        Voir
+                        <Eye height={22} className="relative top-0.5" />
                     </button>
                 </div>
             </div>

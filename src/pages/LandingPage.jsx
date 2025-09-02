@@ -25,6 +25,7 @@ import {
   Smartphone,
 } from "lucide-react";
 
+import NavBar from "@components/shared/NavBar";
 import Video from "@assets/Video.mp4";
 
 const Description = ({ description }) => {
@@ -152,7 +153,7 @@ const Testimonial = ({ author }) => {
   );
 };
 
-const Homes = () => {
+const LandingPage = () => {
   const Tableau_Description = [
     "Plus de 10,000 logements",
     "Verifies et securises",
@@ -248,6 +249,7 @@ const Homes = () => {
 
   return (
     <div id="smooth-content">
+      <NavBar />
       <header
         data-speed="1"
         data-lag="0.5"
@@ -420,4 +422,4 @@ const Homes = () => {
   );
 };
 
-export default Homes;
+export default LandingPage;

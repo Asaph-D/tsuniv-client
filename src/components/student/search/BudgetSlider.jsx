@@ -4,7 +4,6 @@ import 'react-range-slider-input/dist/style.css';
 import { useStudentSearchStore } from "@stores/studentSearchStore";
 
 const BudgetSlider = () => {
-    // On utilise les valeurs du store Zustand
     const priceRange = useStudentSearchStore(state => state.priceRange);
     const setPriceRange = useStudentSearchStore(state => state.setPriceRange);
 
@@ -23,18 +22,30 @@ const BudgetSlider = () => {
 
     return (
         <div className="w-full max-w-xl px-4 mt-6 relative">
-            <label className="block mb-2 font-semibold text-gray-700">Budget mensuel</label>
+            <label className="block mb-2 font-semibold text-[var(--color-base-content)]">
+                Budget mensuel
+            </label>
 
             <div className="absolute bottom-[60px] left-[30px] min-w-full h-0 pointer-events-none z-10">
                 <div
-                    className="absolute transform -translate-x-1/2 -translate-y-full bg-white text-orange-500 text-xs font-semibold px-2 py-1 rounded border border-orange-500 shadow"
-                    style={{ left: `${thumbPositions[0]}px` }}
+                    className="absolute transform -translate-x-1/2 -translate-y-full text-xs font-semibold px-2 py-1 rounded shadow"
+                    style={{
+                        left: `${thumbPositions[0]}px`,
+                        backgroundColor: 'var(--color-base-100)',
+                        color: 'var(--color-warning)',
+                        border: '1px solid var(--color-warning)'
+                    }}
                 >
                     {priceRange[0].toLocaleString()} XAF
                 </div>
                 <div
-                    className="absolute transform -translate-x-1/2 -translate-y-full bg-white text-orange-500 text-xs font-semibold px-2 py-1 rounded border border-orange-500 shadow"
-                    style={{ left: `${thumbPositions[1]}px` }}
+                    className="absolute transform -translate-x-1/2 -translate-y-full text-xs font-semibold px-2 py-1 rounded shadow"
+                    style={{
+                        left: `${thumbPositions[1]}px`,
+                        backgroundColor: 'var(--color-base-100)',
+                        color: 'var(--color-warning)',
+                        border: '1px solid var(--color-warning)'
+                    }}
                 >
                     {priceRange[1].toLocaleString()} XAF
                 </div>

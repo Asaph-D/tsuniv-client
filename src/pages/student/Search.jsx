@@ -5,7 +5,7 @@ import {
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import NavBar from "@components/student/search/NavBar";
+
 import CustomSelect from "@components/student/search/CustomSelect";
 import BudgetSlider from "@components/student/search/BudgetSlider";
 import ToggleSwitch from "@components/student/search/Toggle";
@@ -112,7 +112,7 @@ const SearchPage = () => {
 
         if (isError) {
             return (
-                <div className="flex justify-center items-center w-full h-64 text-red-500 text-lg font-semibold">
+                <div className="flex justify-center items-center w-full h-64 text-primary-content text-lg font-semibold">
                     Erreur lors du chargement des données.
                 </div>
             );
@@ -142,9 +142,7 @@ const SearchPage = () => {
     };
 
     return (
-        <div className="bg-gray-50 min-h-screen font-sans p-4 md:p-8 flex flex-col items-center">
-            <NavBar />
-
+        <div className="bg-base-100 min-h-screen font-sans p-4 md:p-8 flex flex-col items-center">
             <motion.div style={{ scale }} className="relative w-9/12 mt-24 max-w-6xl h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
                 <LazyImage src={Fond} alt="Fond d'écran" className="absolute inset-0 w-full h-full object-cover z-0 grayscale-25" />
                 <div className="absolute inset-0 z-10" />
@@ -158,43 +156,89 @@ const SearchPage = () => {
                 </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="border border-gray-200 rounded-2xl bg-white shadow-xl p-6 mt-8 space-y-6 w-full max-w-4xl">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="border border-[var(--color-base-300)] rounded-2xl bg-[var(--color-base-100)] shadow-xl p-6 mt-8 space-y-6 w-full max-w-4xl"
+            >
                 <div className="relative w-full">
                     <input
                         type="text"
                         placeholder="Rechercher par le nom de la localisation..."
-                        className="input w-full rounded-full pl-12 pr-4 bg-gray-100 border-gray-200 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all"
+                        className="input w-full rounded-full pl-12 pr-4 bg-[var(--color-base-200)] border-[var(--color-base-300)] focus:outline-none focus:border-[var(--color-warning)] focus:ring-1 focus:ring-[var(--color-warning)] transition-all"
                         value={searchText}
                         onChange={handleSearchChange}
                     />
-                    <motion.span initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ duration: 0.3 }} className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-gray-400">
+                    <motion.span
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-[var(--color-neutral-content)]"
+                    >
                         <Search className="w-5 h-5" />
                     </motion.span>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 w-full">
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowFilters(!showFilters)} className="flex justify-center items-center w-full border border-gray-300 p-3 rounded-full hover:bg-gray-100 transition-colors duration-300 text-gray-700 font-semibold">
-                        <FilterIcon className="w-5 h-5 mr-2 text-gray-600" />
-                        <span className="text-gray-700">Filtres</span>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setShowFilters(!showFilters)}
+                        className="flex justify-center items-center w-full border border-[var(--color-base-300)] p-3 rounded-full hover:bg-[var(--color-base-200)] transition-colors duration-300 text-[var(--color-base-content)] font-semibold"
+                    >
+                        <FilterIcon className="w-5 h-5 mr-2 text-[var(--color-neutral-content)]" />
+                        <span className="text-[var(--color-base-content)]">Filtres</span>
                     </motion.button>
                 </div>
 
                 <AnimatePresence>
                     {showFilters && (
-                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="space-y-6">
-                            <div className="divider text-gray-400">Options de filtrage</div>
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="space-y-6"
+                        >
+                            <div className="divider text-[var(--color-neutral-content)]">
+                                Options de filtrage
+                            </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.1 }}>
-                                    <CustomSelect options={["Tous les types", "Appartement", "Chambre", "Studio", "Maison"]} type="roomType" />
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.3, delay: 0.1 }}
+                                >
+                                    <CustomSelect
+                                        options={["Tous les types", "Appartement", "Chambre", "Studio", "Maison"]}
+                                        type="roomType"
+                                    />
                                 </motion.div>
-                                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.2 }}>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.3, delay: 0.2 }}
+                                >
                                     <BudgetSlider />
                                 </motion.div>
-                                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.3 }}>
-                                    <CustomSelect options={["Prix croissant", "Prix décroissant"]} type="sortOption" />
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.3, delay: 0.3 }}
+                                >
+                                    <CustomSelect
+                                        options={["Prix croissant", "Prix décroissant"]}
+                                        type="sortOption"
+                                    />
                                 </motion.div>
-                                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.4 }} className="flex items-center justify-between">
-                                    <p className="text-sm font-semibold text-gray-600 mr-4">
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.4, delay: 0.4 }}
+                                    className="flex items-center justify-between"
+                                >
+                                    <p className="text-sm font-semibold text-[var(--color-neutral-content)] mr-4">
                                         Logements certifiés
                                     </p>
                                     <ToggleSwitch />
@@ -205,13 +249,14 @@ const SearchPage = () => {
                 </AnimatePresence>
             </motion.div>
 
+
             <div className="flex flex-col w-full max-w-6xl mt-10 px-4">
                 <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6">
                     <motion.h2 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }} className="text-2xl font-bold text-gray-800">
                         Résultats de la recherche
                     </motion.h2>
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }} className="flex items-center gap-4">
-                        <span className="text-sm font-bold text-orange-500">
+                        <span className="text-sm font-bold text-primary">
                             {filteredAndSortedRooms.length} logements trouvés
                         </span>
                     </motion.div>

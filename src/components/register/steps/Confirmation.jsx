@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback} from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { CheckCircle } from 'lucide-react';
 
 import html2pdf from 'html2pdf.js';
@@ -31,9 +31,9 @@ const ConfirmationWithFinalization = () => {
     const currentStep = useInscriptionStore(s => s.currentStep);
 
     // Fonction de soumission mémorisée
-    const handleSubmit = useCallback(() => {
-        // ⏳ Validation différée pour fluidifier l'expérience
-        requestIdleCallback(() => {
+    const handleSubmit = useCallback(async () => {
+        // Validation différée pour fluidifier l'expérience
+        requestIdleCallback(async () => {
             const isValid = validateStep(currentStep);
             if (!isValid) return;
 
@@ -42,7 +42,10 @@ const ConfirmationWithFinalization = () => {
                 return;
             }
 
-            // Mémorise l'objet userData
+            // Création de l'objet FormData pour envoyer les fichiers et le JSON
+            const formDataPayload = new FormData();
+
+            // Ajouter les données JSON de l'étudiant sous forme de chaîne
             const userData = {
                 email: formData.email,
                 motDePasse: formData.motDePasse,
@@ -65,28 +68,44 @@ const ConfirmationWithFinalization = () => {
                         : null,
                 },
             };
+            formDataPayload.append('userData', JSON.stringify(userData));
 
-            console.log("✅ Données soumises:", userData);
-            axiosInstance.post('/', userData)
-        .then((response) => {
-            console.log('Réponse serveur:', response.data);
-        })
-        .catch((error) => {
-            console.error('Erreur lors de la soumission:', error);
-            Toast("Erreur lors de la soumission. Veuillez réessayer.", "error");
-            return;
-        })
-            Toast("Inscription réussie !", "success");
+            // Ajouter les fichiers (images)
+            if (formData.photoIdentite) {
+                formDataPayload.append('photoIdentite', formData.photoIdentite);
+            }
+            if (formData.pieceIdentite) {
+                formDataPayload.append('pieceIdentite', formData.pieceIdentite);
+            }
+
+            setLoading(true); // Afficher l'écran de chargement
+
+            try {
+                // Envoi de la requête avec FormData
+                const response = await axiosInstance.post('/auth', formDataPayload);
+                console.log('✅ Réponse serveur:', response.data);
+
+                // Exécuter ces actions UNIQUEMENT après une réponse réussie
+                Toast("Inscription réussie !", "success");
+                setShowPopup(true);
+                setSuccess(true);
+                setTimeout(() => {
+                    resetForm();
+                    window.location.replace('/search');
+                }, 2000);
+            } catch (error) {
+                console.error('❌ Erreur lors de la soumission:', error);
+                Toast("Erreur lors de la soumission. Veuillez réessayer.", "error");
+            } finally {
+                setLoading(false); // Masquer l'écran de chargement
+            }
         });
-    }, [formData, currentStep]); // Dépendances pour re-créer la fonction
+    }, [formData, currentStep]);
 
     // === Ouvrir popup de choix (mémorisée) ===
     const handleFinalize = useCallback(() => {
-        if (formData.consentementCGU) {
-            handleSubmit();
-            setShowPopup(true);
-        }
-    }, [formData.consentementCGU, handleSubmit]);
+        handleSubmit();
+    }, [handleSubmit]);
 
     // === Fermer la modale de preview + nettoyer (mémorisée) ===
     const closePreview = useCallback(() => {
@@ -95,11 +114,10 @@ const ConfirmationWithFinalization = () => {
             setPdfBlobUrl(null);
         }
         setShowPreview(false);
-        setSuccess(true);
         setShowPopup(false);
         setTimeout(() => {
             resetForm();
-            window.location.replace('/');
+            window.location.replace('/search');
         }, 2000);
     }, [pdfBlobUrl, resetForm]);
 
