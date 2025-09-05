@@ -5,9 +5,13 @@ import { motion } from "framer-motion";
 import ThemeToggle from "@layouts/ThemeToggle";
 import { Link } from "react-router";
 import Notifications from "../Notifications";
+import LazyImage from '../../shared/LazyImage'
+import { useProfileStudentQuery } from '@services/fetchProfileData';
 
 const NavBar = () => {
 const [activeTab, setActiveTab] = useState (false);
+    const { data, isPending } = useProfileStudentQuery()
+    const photo = isPending ?null : data.studentDocuments.identityPhotoUrl 
     return (<motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -36,9 +40,9 @@ const [activeTab, setActiveTab] = useState (false);
                 <div>
                     <div role="button" className="btn btn-ghost btn-circle avatar">
                         <Link to={'/profile'}>
-                            <img
+                            <LazyImage
                                 alt="User avatar"
-                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                                src={photo}
                                 className="w-10 rounded-full"
                             />
                         </Link>

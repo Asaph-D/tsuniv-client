@@ -1,74 +1,61 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
+// eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react"
 import { Link } from "react-router"
+import axiosInstance from "@services/axiosInstance"
+import { CheckCircle } from "lucide-react"
+import SuccessStep from "@components/shared/SucessStep"
+import GlobalPreload from "@components/register/GlobalPreload"
 
 const LoginPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("")
   const [password, setPassword] = useState("")
-  const [particles, setParticles] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(null)
 
-  useEffect(() => {
-    const generateParticles = () => {
-      const newParticles = Array.from({ length: 50 }, (_, i) => ({
-        id: i,
-        size: Math.random() * 4 + 2,
-        xStart: Math.random() * 100,
-        yStart: Math.random() * 100,
-        xEnd: Math.random() * 100,
-        yEnd: Math.random() * 100,
-        duration: Math.random() * 20 + 10,
-        delay: Math.random() * 5,
-        opacity: Math.random() * 0.5 + 0.1,
-      }))
-      setParticles(newParticles)
-    }
-
-    generateParticles()
-  }, [])
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-    console.log("Connexion avec:", { phoneNumber, password })
+    setIsLoading(true)
+    setError(null)
+    setSuccess(null)
+
+    try {
+      // Envoi direct d'un objet JSON, plus approprié que FormData
+      const response = await axiosInstance.post('/auth/login', {
+        authBody: {
+          phone: phoneNumber,
+          password: password
+        }
+      })
+
+      console.log("Connexion réussie:", response.data)
+      localStorage.setItem("isAuth",true)
+      setSuccess("Connexion réussie ! Redirection en cours...")
+      // Gérer la redirection ou le stockage du token ici
+
+    } catch (err) {
+      console.error("Échec de la connexion:", err)
+      setError(err.response?.data?.message || "Échec de la connexion. Veuillez vérifier vos identifiants.")
+    } finally { 
+      setIsLoading(false)
+    }
   }
 
   const handleGoogleLogin = () => {
     console.log("Connexion avec Google")
   }
-
+  if (success) {
+    return (
+      <SuccessStep
+        title="Inscription finalisée !"
+        message="Votre dossier a été enregistré avec succès. Vous serez redirigé vers l'accueil."
+        icon={CheckCircle}
+      />
+    );
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted relative overflow-hidden flex items-center justify-center p-4">
-      {/* Particules animées */}
-      <div className="absolute inset-0 overflow-hidden">
-        {particles.map((p) => (
-          <motion.div
-            key={p.id}
-            className="absolute rounded-full bg-primary/20"
-            initial={{
-              left: `${p.xStart}%`,
-              top: `${p.yStart}%`,
-              opacity: 0,
-              scale: 0.5,
-            }}
-            animate={{
-              left: `${p.xEnd}%`,
-              top: `${p.yEnd}%`,
-              opacity: p.opacity,
-              scale: 1,
-            }}
-            transition={{
-              duration: p.duration,
-              delay: p.delay,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
-            style={{
-              width: `${p.size}px`,
-              height: `${p.size}px`,
-            }}
-          />
-        ))}
-      </div>
 
       {/* Carte de connexion */}
       <div className="card w-full max-w-md bg-card shadow-2xl relative z-10 border border-border">
@@ -77,6 +64,9 @@ const LoginPage = () => {
             <h1 className="text-3xl font-bold text-card-foreground mb-2">Connexion</h1>
             <p className="text-muted-foreground">Connectez-vous à votre compte</p>
           </div>
+
+          {/* Affichage des messages d'erreur/succès */}
+          {error && <div className="text-sm text-center p-3 bg-red-100 text-red-700 rounded-lg mb-4">{error}</div>}
 
           <form onSubmit={handleLogin} className="space-y-6">
             <div className="form-control">
@@ -89,6 +79,7 @@ const LoginPage = () => {
                 className="input input-bordered w-full bg-input border-border text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
+                autoComplete="billing tel"
                 required
               />
             </div>
@@ -115,8 +106,9 @@ const LoginPage = () => {
             <button
               type="submit"
               className="btn w-full bg-primary hover:bg-primary/90 text-primary-foreground border-none transition-all duration-200 transform hover:scale-[1.02]"
+              disabled={isLoading}
             >
-              Se connecter
+              {isLoading ? 'Connexion...' : 'Se connecter'}
             </button>
           </form>
 
@@ -146,9 +138,10 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
+
+      {isLoading && <GlobalPreload message={"Votre identite est en cours de verification."} />}
     </div>
   )
 }
 
 export default LoginPage;
-

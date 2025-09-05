@@ -8,3 +8,15 @@ export const transition = {
   duration: 0.3,
   ease: [0.33, 1, 0.68, 1], 
 };
+
+export const itemVariants = {
+  hidden: { y: 40, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};

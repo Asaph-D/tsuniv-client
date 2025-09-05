@@ -11,10 +11,6 @@ import App from './App.jsx';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 
-// It's generally better to manage authentication state in a proper context or store
-// rather than directly in localStorage at the entry point.
-// For now, let's keep it as is.
-localStorage.setItem('isAuth', 'true');
 
 createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>

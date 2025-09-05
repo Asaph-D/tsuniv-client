@@ -45,62 +45,64 @@ const ConfirmationWithFinalization = () => {
             // Création de l'objet FormData pour envoyer les fichiers et le JSON
             const formDataPayload = new FormData();
 
-            // Ajouter les données JSON de l'étudiant sous forme de chaîne
+            // Construction de l'objet JSON à envoyer
             const userData = {
                 email: formData.email,
-                motDePasse: formData.motDePasse,
-                nom: formData.nom,
-                prenom: formData.prenom,
-                telephone: formData.telephone,
+                password: formData.motDePasse, // Mappage de motDePasse -> password
+                firstName: formData.prenom,    // Mappage de prenom -> firstName
+                lastName: formData.nom,        // Mappage de nom -> lastName
+                phone: formData.telephone,     // Mappage de telephone -> phone
                 role: "ETUDIANT",
                 consentementCGU: formData.consentementCGU,
-                etudiant: {
+                student: {                     // Mappage de etudiant -> student
                     sexe: formData.sexe,
-                    dateNaissance: new Date(formData.dateNaissance),
+                    birthDate: formData.dateNaissance, // Mappage de dateNaissance -> birthDate
                     typeDocument: formData.typeDocument,
-                    institut: formData.institut,
-                    profilParental: formData.isParentBooking
+                    cityOfStudy: formData.villeEtude,  // Mappage de villeEtude -> cityOfStudy
+                    parentProfile: formData.isParentBooking
                         ? {
-                            nom: formData.nomParent,
-                            lienParente: formData.lienParente,
-                            telephone: formData.telephoneParent,
+                            name: formData.nomParent,      // Mappage de nomParent -> name
+                            kinship: formData.lienParente, // Mappage de lienParente -> kinship
+                            phone: formData.telephoneParent, // Mappage de telephoneParent -> phone
                         }
                         : null,
                 },
             };
-            formDataPayload.append('userData', JSON.stringify(userData));
 
-            // Ajouter les fichiers (images)
+            formDataPayload.append("userData", JSON.stringify(userData));
+
+            // Ajout des fichiers
             if (formData.photoIdentite) {
-                formDataPayload.append('photoIdentite', formData.photoIdentite);
+                formDataPayload.append("photoIdentite", formData.photoIdentite);
             }
+
             if (formData.pieceIdentite) {
-                formDataPayload.append('pieceIdentite', formData.pieceIdentite);
+                formDataPayload.append("pieceIdentite", formData.pieceIdentite);
             }
 
             setLoading(true); // Afficher l'écran de chargement
 
             try {
-                // Envoi de la requête avec FormData
-                const response = await axiosInstance.post('/auth', formDataPayload);
-                console.log('✅ Réponse serveur:', response.data);
+                const response = await axiosInstance.post("/auth/register", formDataPayload);
+                console.log("✅ Réponse serveur:", response.data);
 
-                // Exécuter ces actions UNIQUEMENT après une réponse réussie
                 Toast("Inscription réussie !", "success");
                 setShowPopup(true);
                 setSuccess(true);
+
                 setTimeout(() => {
                     resetForm();
-                    window.location.replace('/search');
+                    window.location.replace("/search");
                 }, 2000);
             } catch (error) {
-                console.error('❌ Erreur lors de la soumission:', error);
+                console.error("❌ Erreur lors de la soumission:", error);
                 Toast("Erreur lors de la soumission. Veuillez réessayer.", "error");
             } finally {
                 setLoading(false); // Masquer l'écran de chargement
             }
         });
     }, [formData, currentStep]);
+
 
     // === Ouvrir popup de choix (mémorisée) ===
     const handleFinalize = useCallback(() => {

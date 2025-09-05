@@ -13,7 +13,7 @@ const isPhoneValid = (phone) => {
     }
 };
 
-const App = () => {
+const PhoneInputField = () => {
  const {formData, updateFormData, errors} = useInscriptionStore()
     const isValid = isPhoneValid(formData.telephone);
 
@@ -36,4 +36,4 @@ const App = () => {
 
 };
 
-export default App;
+export default PhoneInputField;

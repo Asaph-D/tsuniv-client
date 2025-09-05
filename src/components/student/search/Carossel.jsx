@@ -103,7 +103,7 @@ const Carossel = ({ cards }) => {
 
             <div
                 ref={carouselRef}
-                className="relative carousel carousel-center p-8 bg-gradient-to-br from-gray-300 to-orange-200 rounded-box gap-6 h-[600px] overflow-x-scroll scrollbar-hide"
+                className="relative carousel carousel-center py-8 bg-gradient-to-br from-gray-300 to-orange-200 rounded-box gap-6 h-[560px] overflow-x-scroll scrollbar-hide"
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
             >
@@ -111,7 +111,7 @@ const Carossel = ({ cards }) => {
                 {cards.map((elem, index) => (
                     <motion.div
                         key={index}
-                        className="carousel-item mx-auto"
+                        className="carousel-item max-w-sm w-full mx-auto"
                         initial={{ opacity: 0, y: 30, scale: 0.95 }}
                         whileInView={{ opacity: 1, y: 0, scale: 1 }}
                         viewport={{ amount: 0.4 }}

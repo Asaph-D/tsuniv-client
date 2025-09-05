@@ -13,6 +13,7 @@ const initialFormData = {
   dateNaissance: "",
   typeDocument: "",
   Institut: "",
+  villeEtude: "",
   isParentBooking: false,
   nomParent: "",
   lienParente: "",
@@ -22,7 +23,7 @@ const initialFormData = {
 };
 
 const useInscriptionStore = create((set) => ({
-  currentStep: 3,
+  currentStep: 1,
   formData: { ...initialFormData },
   errors: {},
   filePreviews: {},

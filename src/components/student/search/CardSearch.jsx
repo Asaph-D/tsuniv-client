@@ -1,5 +1,6 @@
 import { Heart, Locate, Users, Shield, Eye } from "lucide-react";
 import LazyImage from "@components/shared/LazyImage";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const FavoriteButton = () => (
@@ -28,14 +29,14 @@ const CardSearch = ({ room, onClick }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="max-w-sm h-[520px] bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200"
+            className="max-w-[400px] mx-auto h-[520px] bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200"
         >
             {/* Image + badges */}
             <div className="relative">
                 <LazyImage
                     src={image}
                     alt={name}
-                    className="w-full h-64 object-cover"
+                    className="h-64 object-cover"
                 />
                 <FavoriteButton />
 

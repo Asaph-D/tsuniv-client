@@ -494,7 +494,7 @@ export const mockProfileData = {
     phone: "06 12 34 56 78",
     birthDate: "2002-03-15",
     university: "Sorbonne Université",
-    city: "Paris",
+    cityOfStudy: "Paris",
     favorites: 12,
     searches: 45,
 };

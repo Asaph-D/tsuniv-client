@@ -94,7 +94,7 @@ const SearchPage = () => {
     const renderResults = () => {
         if (isLoading) {
             return (
-                <div className="carousel w-full flex flex-wrap justify-center gap-6 overflow-hidden h-[600px] md:h-auto md:justify-start">
+                <div className="carousel w-full flex flex-wrap justify-center gap-6 overflow-hidden h-[600px]">
                     {/* Skeleton pour mobile (1) */}
                     <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 flex justify-center">
                         <SkeletonCardSearch />
@@ -142,9 +142,11 @@ const SearchPage = () => {
     };
 
     return (
-        <div className="bg-base-100 min-h-screen font-sans p-4 md:p-8 flex flex-col items-center">
-            <motion.div style={{ scale }} className="relative w-9/12 mt-24 max-w-6xl h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
-                <LazyImage src={Fond} alt="Fond d'écran" className="absolute inset-0 w-full h-full object-cover z-0 grayscale-25" />
+        <div className="bg-base-100 min-h-screen font-sans p-2 flex flex-col items-center">
+            <motion.div style={{ scale }} className="relative w-9/12 mt-10 max-w-6xl h-64 md:h-80 rounded-xl 
+            overflow-hidden shadow-lg">
+                <LazyImage src={Fond} alt="Fond d'écran" className="absolute inset-0 w-full h-full 
+                object-cover z-0 grayscale-25" />
                 <div className="absolute inset-0 z-10" />
                 <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg">
@@ -160,7 +162,8 @@ const SearchPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="border border-[var(--color-base-300)] rounded-2xl bg-[var(--color-base-100)] shadow-xl p-6 mt-8 space-y-6 w-full max-w-4xl"
+                className="border border-[var(--color-base-300)] rounded-2xl bg-[var(--color-base-100)] 
+                shadow-xl p-6 mt-8 space-y-6 w-full max-w-4xl"
             >
                 <div className="relative w-full">
                     <input
@@ -263,7 +266,7 @@ const SearchPage = () => {
                 </div>
             </div>
 
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.3 }} className="w-full max-w-6xl mt-4 px-4">
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.3 }} className="w-full max-w-6xl mt-4">
                 {renderResults()}
             </motion.div>
 

@@ -101,7 +101,7 @@ const PersonalInfo = () => {
                     <label className="label"><span className="label-text">Date de naissance *</span></label>
                     <input
                         type="date"
-                        autoComplete="bday"
+                        autoComplete="bday-day webauthn"
                         value={formData.dateNaissance}
                         onChange={handleChange('dateNaissance')}
                         className={`input input-bordered w-full ${errors.dateNaissance ? 'input-error' : ''}`}
@@ -114,8 +114,20 @@ const PersonalInfo = () => {
                     <input
                         type="text"
                         autoComplete="address-level2"
+                        value={formData.Institut}
+                        onChange={handleChange('Institut')}
+                        className={`input input-bordered w-full ${errors.Institut ? 'input-error' : ''}`}
+                    />
+                    {errors.institut && <span className="label-text-alt text-error">{errors.Institut}</span>}
+                </div>
+
+                <div className="form-control">
+                    <label className="label"><span className="label-text">Ville d'Etude</span></label>
+                    <input
+                        type="text"
+                        autoComplete="address-level2"
                         value={formData.villeEtude}
-                        onChange={handleChange('institut')}
+                        onChange={handleChange('villeEtude')}
                         className={`input input-bordered w-full ${errors.villeEtude ? 'input-error' : ''}`}
                     />
                     {errors.villeEtude && <span className="label-text-alt text-error">{errors.villeEtude}</span>}

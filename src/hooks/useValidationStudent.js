@@ -14,7 +14,8 @@ const validateStep1 = (data) => {
   if (!data.prenom) errors.prenom = "Prénom requis";
   if (!data.sexe) errors.sexe = "Sexe requis";
   if (!data.dateNaissance) errors.dateNaissance = "Date de naissance requise";
-  if (!data.institut) errors.villeEtude = "L'institut est requis";
+  if (!data.villeEtude) errors.villeEtude = "La ville d'etude est requise";
+  if (!data.Institut) errors.Institut = "L'institut est requis";
   return errors;
 };
 
