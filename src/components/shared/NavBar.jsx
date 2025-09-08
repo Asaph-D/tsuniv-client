@@ -3,6 +3,7 @@ import { Home, BarChart2, MessageCircle, PhoneCall, LogIn } from "lucide-react";
 import { Link } from "react-router";
 import gsap from "gsap";
 import { ScrollTrigger, ScrollSmoother } from "gsap/all";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -46,7 +47,7 @@ const NavBar = () => {
         end: "bottom center",
         onEnter: () => setActiveSection(id),
         onEnterBack: () => setActiveSection(id),
-        markers : true,
+        markers: true,
       });
     });
 
@@ -106,47 +107,46 @@ const NavBar = () => {
         {/* Mobile Menu Toggle */}
         <div className="flex gap-4 text-white md:hidden" >
           <Link to="/login" className="flex flex-col items-center hover:scale-105 transition-all duration-300 ease-in-out">
-            <svg xmlns="http://www.w3.org/2000/svg" 
-            className="h-6 w-6 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-2xl" 
-            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-2xl"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />
             </svg>
             <span className={`${scrolled && `text-black font-bold`} transition-all duration-1000 ease-in-out origin-center`}>Login</span>
           </Link>
 
           <Link to="/register" className="flex flex-col items-center hover:scale-105">
-            <svg xmlns="http://www.w3.org/2000/svg" 
-            className="h-6 w-6 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-2xl"
-             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-2xl"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
             <span className={`${scrolled && `text-black font-bold`} transition-all duration-1000 ease-in-out origin-center`}>Sign Up</span>
           </Link>
-  
+
         </div>
 
       </motion.nav>
 
       {/* Bottom Mobile Sidebar */}
 
-<div className="flex justify-center fixed bottom-0 w-full z-40 backdrop-blur-md bg-white/80 border-t 
+      <div className="flex justify-center fixed bottom-0 w-full z-40 backdrop-blur-md bg-white/80 border-t 
 border-gray-200 shadow-inner md:hidden rounded-2xl">
-  <ul className="menu menu-horizontal justify-around px-2 py-3 text-sm">
-    {Tab_Ancrages.map(({ id, icon, label }) => (
-      <li key={id}>
-        <button
-          onClick={() => scrollToSection(id)}
-          className={`flex flex-col items-center gap-1 ${
-            activeSection === id ? "text-orange-500 font-semibold" : "text-gray-700"
-          } hover:text-orange-400`}
-        >
-          {icon}
-          <span>{label}</span>
-        </button>
-      </li>
-    ))}
-  </ul>
-</div>
+        <ul className="menu menu-horizontal justify-around px-2 py-3 text-sm">
+          {Tab_Ancrages.map(({ id, icon, label }) => (
+            <li key={id}>
+              <button
+                onClick={() => scrollToSection(id)}
+                className={`flex flex-col items-center gap-1 ${activeSection === id ? "text-orange-500 font-semibold" : "text-gray-700"
+                  } hover:text-orange-400`}
+              >
+                {icon}
+                <span>{label}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
 
     </>
   );

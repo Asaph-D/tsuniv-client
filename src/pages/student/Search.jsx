@@ -1,6 +1,8 @@
 import {
     Search,
     FilterIcon,
+    ArrowBigRightDashIcon,
+    ArrowBigLeftDashIcon
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
@@ -278,7 +280,7 @@ const SearchPage = () => {
                             onClick={() => handlePageChange(currentPage - 1)}
                             disabled={currentPage === 1}
                         >
-                            «
+                            <ArrowBigLeftDashIcon/>
                         </button>
                         {[...Array(totalPages)].map((_, index) => (
                             <button
@@ -294,7 +296,7 @@ const SearchPage = () => {
                             onClick={() => handlePageChange(currentPage + 1)}
                             disabled={currentPage === totalPages}
                         >
-                            »
+                            <ArrowBigRightDashIcon className="animate-pulse"/>
                         </button>
                     </div>
                 </motion.div>

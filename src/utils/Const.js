@@ -1,3 +1,15 @@
+import {
+  Star,
+  Shield,
+  Users,
+  Wifi,
+  Car,
+  Utensils,
+  GraduationCap,
+  Home,
+  Award,
+} from "lucide-react";
+
 export const Rooms = [
   {
     id: 1,
@@ -485,16 +497,91 @@ export const Rooms = [
   },
 ];
 
-
 // Données de profil simulées
 export const mockProfileData = {
-    firstName: "Merveille",
-    lastName: "Belinga Ntsama",
-    email: "raymond2belinga@gmail.com",
-    phone: "06 12 34 56 78",
-    birthDate: "2002-03-15",
-    university: "Sorbonne Université",
-    cityOfStudy: "Paris",
-    favorites: 12,
-    searches: 45,
+  firstName: "Merveille",
+  lastName: "Belinga Ntsama",
+  email: "raymond2belinga@gmail.com",
+  phone: "06 12 34 56 78",
+  birthDate: "2002-03-15",
+  university: "Sorbonne Université",
+  cityOfStudy: "Paris",
+  favorites: 12,
+  searches: 45,
 };
+
+export const Tableau_Description = [
+  "Plus de 10,000 logements",
+  "Verifies et securises",
+  "Support 24/7",
+];
+
+export const Tableau_Services = [
+  {
+    Icon: Shield,
+    title: "Logements vérifiés",
+    comment:
+      "Tous nos logements sont inspectés et certifiés pour votre sécurité et confort.",
+  },
+  {
+    Icon: Users,
+    title: "Colocations",
+    comment:
+      "Trouvez des colocataires compatibles pour partager votre logement.",
+  },
+  {
+    Icon: Wifi,
+    title: "Internet haut débit",
+    comment: "Accès à Internet haut débit dans tous nos logements.",
+  },
+  {
+    Icon: Car,
+    title: "Parking sécurisé",
+    comment: "Des places de parking sécurisées disponibles pour les résidents.",
+  },
+  {
+    Icon: Utensils,
+    title: "Restauration",
+    comment: "Options de restauration à proximité pour tous les goûts.",
+  },
+  {
+    Icon: GraduationCap,
+    title: "Proximité des universités",
+    comment:
+      "Tous nos logements sont situés à proximité des universités et écoles.",
+  },
+];
+
+export const Tableau_Stats = [
+  { Icon: Home, value: "10000+", label: "Logements disponibles" },
+  { Icon: Award, value: "4.8/5", label: "Note moyenne des logements" },
+  { Icon: Users, value: "5000+", label: "Étudiants satisfaits" },
+  { Icon: Star, value: "98%", label: "Taux de satisfaction" },
+];
+
+export const testimonials = [
+  {
+    name: "Marie Dubois",
+    university: "Sorbonne Université",
+    image:
+      "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=1",
+    text: "Grâce à TSUniv, j'ai trouvé un studio parfait à 10 minutes de mon campus. Le processus était simple et rapide !",
+    rating: 5,
+  },
+  {
+    name: "Thomas Martin",
+    university: "École Polytechnique",
+    image:
+      "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=1",
+    text: "La colocation que j'ai trouvée via TSUniv est géniale. Mes colocataires sont devenus mes meilleurs amis !",
+    rating: 5,
+  },
+  {
+    name: "Sarah Johnson",
+    university: "Sciences Po",
+    image:
+      "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=1",
+    text: "Service client exceptionnel ! Ils m'ont aidée à résoudre tous mes problèmes rapidement. Je recommande vivement.",
+    rating: 5,
+  },
+];

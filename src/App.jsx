@@ -9,7 +9,7 @@ const Search = lazy(() => import("@pages/student/Search"));
 const Profile = lazy(() => import("@pages/student/Profile"));
 const Test = lazy(() => import("./Test"));
 const Erreur = lazy(() => import("@pages/Erreur"));
-
+import NavBar from './components/shared/NavBar'
 import ProtectedRoute from "@layouts/ProtectedRoute";
 
 function App() {
